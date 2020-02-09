@@ -23,7 +23,7 @@ function getJokes() {
   let fetching = fetch(url, options);
 
   fetching.then(function(response) {
-    errroHandler();
+    errroHandler(response);
     response
       .json()
       .then(function(json) {

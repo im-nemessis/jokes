@@ -25,14 +25,10 @@ app.use(express.static(dir));
 // all  possible get routes
 
 app.get("/", (req, res) => {
-  res.send(" <a href='/joke'><button>Get jokes</button></a> ");
-});
-
-app.get("/joke", (req, res) => {
   res.sendFile(dir + "/index.html");
 });
 
-/* app.get("/joke", (req, res) => {
+app.get("/joke", (req, res) => {
   let options = {
     url: "https://icanhazdadjoke.com/",
     method: "GET",
@@ -42,21 +38,18 @@ app.get("/joke", (req, res) => {
     }
   };
 
-  let hi = request(options, function(error, response, body) {
+  request(options, function(error, response, body) {
     if (error) {
       console.log(error);
-
-      res.render("unsuccessful");
+      res.json({ result: "CHECK YOUR iNTERNET CONNECTION" });
     } else {
+      console.log(body);
       let data = JSON.parse(body);
-
       console.log(data);
-      res.render("jokes", {
-        jokes: data.joke
-      });
+      res.json({ result: data.joke });
     }
   });
-}); */
+});
 
 app.listen(port, () => {
   console.log("");
